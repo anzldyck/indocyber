@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -129,4 +129,586 @@
             </div>
         </div>
     </body>
-</html>
+</html> --}}
+
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Book Store</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+      
+    </head>
+    <body>
+        @php
+            $books = App\Models\Books::latest()->get();
+        @endphp
+       <section>
+        <nav class="navbar navbar-expand-lg navbar-light pt-3 pt-lg-5">
+            <style scoped>
+                @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+                * {
+                    font-family: 'Inter', sans-serif !important;
+                }
+
+                body {
+                    background-color: #FFFFFF;
+                }
+
+                body nav .navbar-brand h5 {
+                    font-weight: 700 !important;
+                    size: 28px;
+                    line-height: 150%;
+                }
+
+                body nav .navbar-nav .nav-link {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #739AD4 !important;
+                    margin: 0 30px;
+                }
+
+                body nav .navbar-nav .active {
+                    color: #080E09 !important;
+                    width: 100%;
+                    display: -webkit-box !important;
+                    display: -ms-flexbox !important;
+                    display: flex !important;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                }
+
+                body nav .navbar-nav .active a {
+                    width: 12px;
+                }
+
+                body nav .navbar-nav .border-bottom {
+                    border-bottom: 2px solid #0F52BA !important;
+                }
+
+                @media screen and (min-width: 993px) {
+                    body nav .navbar-nav {
+                        margin-left: 560px;
+                    }
+                }
+            </style>
+
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <h5 class="mb-0">Book Store</h5>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link active border-bottom" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item d-flex justify-content-center">
+                            <a class="nav-link" href="#">Recommendation</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <a href="{{ route('login') }}" class="btn btn-blues shadow">Sign In</a>
+                </div>
+            </div>
+        </nav>
+
+        <section class="container">
+            <style scoped>
+                /* @media screen and (min-width: 768px) {
+                    body .pl-house {
+                        margin: 0 !important;
+                        padding-left: 100px;
+                    }
+                }
+
+                @media screen and (max-width: 768px) {
+                    body .pl-house {
+                        margin: 0 10px 0 5px !important;
+                    }
+                } */
+
+                body #header {
+                    margin-top: 138px;
+                    margin-bottom: 100px;
+                    width: 100% !important;
+                }
+
+                @media screen and (max-width: 768px) {
+                    body #header {
+                        margin-top: 50px;
+                        margin-bottom: 50px;
+                    }
+                }
+
+                body .img-header {
+                    z-index: -1;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                }
+
+                body .explore {
+                    background-color: #080E09;
+                    padding-top: 100px;
+                    padding-bottom: 50px;
+                }
+
+                @media screen and (max-width: 768px) {
+                    body .explore {
+                        padding-top: 50px;
+                        padding-bottom: 50px;
+                    }
+                }
+
+                body .explore .descript-explore {
+                    max-width: 75%;
+                }
+
+                body .pt-35 {
+                    padding-top: 35px;
+                }
+
+                body .title h1 {
+                    font-size: 72px;
+                    font-weight: 700;
+                    line-height: 150%;
+                }
+
+                @media screen and (max-width: 768px) {
+                    body .title h1 {
+                        font-size: 48px;
+                    }
+                }
+
+                body .stat {
+                    margin-top: 48px;
+                }
+
+                body .stat h2 {
+                    font-size: 48px;
+                    font-weight: 800;
+                }
+
+                @media screen and (max-width: 768px) {
+                    body .stat h2 {
+                        font-size: 28px;
+                    }
+                }
+
+                body .stat p {
+                    font-size: 16px;
+                    color: #ADB2B8;
+                    font-weight: 400;
+                    line-height: 28px;
+                }
+
+                body .stat .descript-head {
+                    max-width: 90%;
+                }
+
+                body .btn-blue {
+                    background-color: #0F52BA;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 16px;
+                    border-radius: 12px;
+                    margin-top: 48px;
+                }
+
+                body .btn-blues {
+                    background-color: #0F52BA;
+                    color: white;
+                    font-weight: 600;
+                    font-size: 16px;
+                    border-radius: 12px;
+                }
+
+                body .gallery {
+                    padding: 10px 0;
+                }
+
+                @media only screen and (max-width: 768px) {
+                    body .gallery {
+                        margin: 50px 0;
+                    }
+                }
+
+                body .gallery .card-hotel-carousel {
+                    width: 325px;
+                    margin-right: 64px;
+                    padding: 28px 28px 40px;
+                    border-radius: 28px;
+                    background: white;
+                    -webkit-box-shadow: 20px 8px 18px rgba(178, 177, 255, 0.05);
+                    box-shadow: 20px 8px 18px rgba(178, 177, 255, 0.05);
+                }
+
+                @media only screen and (max-width: 768px) {
+                    body .gallery .card-hotel-carousel {
+                        margin-right: 20px;
+                    }
+                }
+
+                body .gallery .card-hotel-carousel .image-placeholder {
+                    width: 268px;
+                    height: 260px;
+                }
+
+                body .gallery .card-hotel-carousel .image-placeholder img {
+                    width: 100%;
+                    height: 100%;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    border-radius: 16px;
+                }
+
+                body .gallery .card-hotel-carousel .card-details {
+                    padding-bottom: 53px;
+                    height: 150px;
+                }
+
+                body .gallery .card-hotel-carousel .card-details .caption {
+                    font-weight: 700;
+                    font-size: 24px;
+                    color: #080E09;
+                    margin-top: 24px;
+                }
+
+                body .gallery .card-hotel-carousel .card-details .sub-caption {
+                    font-weight: 400;
+                    color: #ADB2B8;
+                }
+
+                body .gallery .card-hotel-carousel .bottom-text .price-content {
+                    color: #080E09;
+                    font-size: 16px;
+                }
+
+                body .gallery .card-hotel-carousel .bottom-text .price-content span {
+                    font-weight: 400;
+                }
+
+                body .gallery .card-hotel-carousel .bottom-text .price-content span.price {
+                    font-weight: 700;
+                }
+
+                body .gallery .card-hotel-carousel .bottom-text .rating {
+                    font-weight: 700;
+                    font-size: 16px;
+                    color: #FF9900;
+                }
+
+                body .gallery .card-hotel-carousel .bottom-text .rating img {
+                    margin-top: -1px;
+                    margin-right: 5px;
+                }
+
+                @media screen and (min-width: 600px) {
+                    body .image-content .img-fluid {
+                        height: 144.953px;
+                    }
+                }
+
+                body .text-content h1 {
+                    font-size: 60px !important;
+                    line-height: 150%;
+                    color: white;
+                }
+
+                body .text-content p {
+                    font-size: 16px;
+                    color: #ADB2B8;
+                    font-weight: 400;
+                    line-height: 28px;
+                    padding-bottom: 108px;
+                }
+
+                body .place .img-place-header {
+                    width: 100% !important;
+                }
+
+                body .scrolling-wrapper {
+                    overflow-x: auto;
+                }
+
+                body .section::-webkit-scrollbar {
+                    height: 0 !important;
+                }
+
+                body .section::-webkit-scrollbar-track {
+                    background-color: #e4e4e4;
+                    border-radius: 100px;
+                }
+
+                body .section::-webkit-scrollbar-thumb {
+                    background-color: #05BB2D;
+                    border-radius: 100px;
+                }
+            </style>
+            <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/bg-header.svg"
+                alt="bg-header" class="img-header d-none d-md-block">
+            <div class="row mx-0" id="header">
+                <div class="col-xl-6">
+                    <div class="title">
+                        <h1>
+                            Find your Favorite books
+                        </h1>
+                    </div>
+                    <div class="d-flex stat">
+                        <div class="text-left me-4 me-md-5">
+                            <h2>
+                                37
+                            </h2>
+                            <p>
+                                Komik
+                            </p>
+                        </div>
+                        <div class="vr"></div>
+                        <div class="px-md-5 px-4">
+                            <h2>
+                                80
+                            </h2>
+                            <p>
+                                Sains
+                            </p>
+                        </div>
+                        <div class="vr"></div>
+                        <div class="ms-4 ms-md-5">
+                            <h2>
+                                760
+                            </h2>
+                            <p>
+                                Programming
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <p class="descript-head">
+                            The more that you read, the more things you will know. The more that you learn, the more places you’ll go
+                        </p>
+                    </div>
+                    <div>
+                        <button class="btn btn-blue px-5 py-3 shadow">
+                            Find Book
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xl-6 my-auto">
+                    <div class="gallery row p-md-4 section scrolling-wrapper flex-row flex-nowrap">
+                        <!-- CARD 1 -->
+                        <div class="card-hotel-carousel">
+                            <div class="image-placeholder">
+                                <img src="https://i.pinimg.com/474x/67/de/12/67de123d80c51f8bfb29934648624f99.jpg"
+                                    alt="images" />
+                            </div>
+                            <div class="card-details">
+                                <div class="caption">Marshland</div>
+                                <span class="sub-caption">Mathew Olshan</span>
+                            </div>
+                            <div class="bottom-text d-flex flex-row justify-content-between">
+                                <div class="price-content flex-grow-1">
+                                    <span>Start from</span> <span class="price">40 USD</span>
+                                </div>
+                                <div class="rating d-flex align-items-center">
+                                    <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                        alt="star" />
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END CARD 1 -->
+                        <!-- CARD 2 -->
+                        <div class="card-hotel-carousel">
+                            <div class="image-placeholder">
+                                <img src="https://i.pinimg.com/474x/14/75/39/147539aac2b751e5d0813c346ac4be43.jpg"
+                                    alt="images" />
+                            </div>
+                            <div class="card-details">
+                                <div class="caption">The Throught Breaking</div>
+                                <span class="sub-caption">Cate Emond</span>
+                            </div>
+                            <div class="bottom-text d-flex flex-row justify-content-between">
+                                <div class="price-content flex-grow-1">
+                                    <span>Start from</span> <span class="price">40 USD</span>
+                                </div>
+                                <div class="rating d-flex align-items-center">
+                                    <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                        alt="star" />
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END CARD 2 -->
+                        <!-- CARD 3 -->
+                        <div class="card-hotel-carousel">
+                            <div class="image-placeholder">
+                                <img src="https://i.pinimg.com/474x/66/ab/e4/66abe4b5abbd209f4a09fcd8afc207d9.jpg"
+                                    alt="images" />
+                            </div>
+                            <div class="card-details">
+                                <div class="caption">The Jungle Book</div>
+                                <span class="sub-caption">Rudyard</span>
+                            </div>
+                            <div class="bottom-text d-flex flex-row justify-content-between">
+                                <div class="price-content flex-grow-1">
+                                    <span>Start from</span> <span class="price">40 USD</span>
+                                </div>
+                                <div class="rating d-flex align-items-center">
+                                    <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                        alt="star" />
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END CARD 3 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </section> 
+
+        <section class="content">
+            <style scoped>
+                @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+          
+                * {
+                  font-family: 'Poppins', sans-serif !important;
+                }
+          
+                body .content {
+                  background: #FFFFFF;
+                }
+          
+                body .content .content {
+                  padding-top: 70px;
+                  padding-bottom: 70px;
+                }
+          
+                body .content .content .tagline {
+                  font-family: Poppins;
+                  font-style: normal;
+                  font-weight: bold;
+                  font-size: 18px;
+                  line-height: 27px;
+                  /* identical to box height */
+                  color: #DB0D70;
+                }
+          
+                body .content .content .headline {
+                  font-family: Poppins;
+                  font-style: normal;
+                  font-weight: bold;
+                  font-size: 45px;
+                  line-height: 67px;
+                  color: #111F37;
+                }
+          
+                body .content .content .benefits {
+                  margin-top: 50px;
+                  padding-bottom: 50px;
+                }
+          
+                body .content .content .benefits .rectangle {
+                  max-width: 288px;
+                  max-height: 334px;
+                  border: 1px solid #9BA8BE;
+                  -webkit-box-sizing: border-box;
+                  box-sizing: border-box;
+                  border-radius: 26px;
+                }
+          
+                body .content .content .benefits .rectangle img {
+                  margin-top: 50px;
+                }
+          
+                body .content .content .benefits .rectangle .headline-benefit {
+                  margin-top: 40px;
+                  font-family: Poppins;
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 18px;
+                  line-height: 27px;
+                  /* identical to box height */
+                  text-align: center;
+                  color: #111F37;
+                }
+          
+                body .content .content .benefits .rectangle .subheadline-benefit {
+                  font-family: Poppins;
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 16px;
+                  line-height: 28px;
+                  /* or 175% */
+                  text-align: center;
+                  color: #627492;
+                  margin-bottom: 40px;
+                }
+          
+                body .content .content .img-brand {
+                  margin-top: 50px;
+                }
+          
+                body .content .content .img-brand img {
+                  margin-right: 60px;
+                }
+          
+                @media only screen and (max-width: 768px) {
+                  body .content .content .img-brand img {
+                    margin-right: 30px;
+                    margin-left: 30px;
+                  }
+                }
+          
+                /*# sourceMappingURL=main.css.map */
+              </style>
+            <div class="container">
+                <div class="row content">
+                  <div class="col-12 px-md-0 my-auto">
+                    <div class="tagline">
+                      RECOMENDATION
+                    </div>
+                    <div class="gallery row p-md-4 section scrolling-wrapper flex-row flex-nowrap">
+                        @foreach ($books as $item)
+                            <!-- CARD 1 -->
+                            <div class="card-hotel-carousel">
+                                <div class="image-placeholder">
+                                    <img src="{{ url($item->photo) }}"
+                                        alt="images" />
+                                </div>
+                                <div class="card-details">
+                                    <div class="caption">{{ $item->title }}</div>
+                                    <span class="sub-caption">Stok {{ $item->stock }}</span>
+                                </div>
+                                <div class="bottom-text d-flex flex-row justify-content-between">
+                                    <div class="price-content flex-grow-1">
+                                        <span>Start from</span> <span class="price">40 USD</span>
+                                    </div>
+                                    <div class="rating d-flex align-items-center">
+                                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header-House/star-yellow.svg"
+                                            alt="star" />
+                                        <span>4.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- END CARD 1 -->
+                        @endforeach
+                        
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    </body>
+  </html>

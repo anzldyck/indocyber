@@ -29,17 +29,26 @@
                         <div class="form-group">
                             <label for="">Title</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('name') }}">
-                            @error('name') <div class="text-muted">{{ $message }}</div> @enderror
+                            @error('title') <div class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                            @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="">Stock</label>
                             <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{ old('stock') }}">
-                            @error('stock') <div class="text-muted">{{ $message }}</div> @enderror
+                            @error('stock') <div class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                            @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="">Photo</label>
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" accept="image/*" required>
-                            @error('photo') <div class="text-muted">{{ $message }}</div> @enderror
+                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" accept="image/*">
+                            @error('photo') <div class="invalid-feedback">
+                              {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="mt-5">
                             <button type="submit" class="btn btn-primary">Create</button>

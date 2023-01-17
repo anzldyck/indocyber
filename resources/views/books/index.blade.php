@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('css')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+@endsection
 
 @section('content')
 <section>
@@ -27,7 +30,7 @@
                         <a class="btn btn-primary" href="{{ route('books.create') }}">Add Data</a>
                     </div>
                     <div class="card-body">
-                        <table class="table" id="tableBook">
+                        <table class="table table-responsive table-bordered" id="tableBook">
                             <thead>
                                 <tr>
                                     <th>Photo</th>
@@ -65,9 +68,13 @@
         </div>
     </section>  
     
-    <script>
-        $(document).ready( function () {
-            $('#tableBook').DataTable();
-        });
-    </script>
+
+@endsection
+@section('script')
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#tableBook').DataTable();
+    });
+</script>
 @endsection
