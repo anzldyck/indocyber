@@ -82,11 +82,14 @@ class BooksController extends Controller
      */
     public function update(BooksRequest $request, $id)
     {
-        $data = $request->all();
-        $data['photo'] = $request->file('photo')->store('assets/book', 'public');
-        $data['updated_by'] = Auth::user()->id;
-
         $item = Books::findOrFail($id);
+        $data = $request->all();
+        if(!$request->photo) {
+            $request->photo = $item->photo;
+        } else {
+            $data['photo'] = $request->file('photo')->store('assets/book', 'public');
+        }
+        $data['updated_by'] = Auth::user()->id;
         $item->update($data);
         return redirect()->route('books');
     }

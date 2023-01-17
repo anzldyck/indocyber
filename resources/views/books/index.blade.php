@@ -49,7 +49,7 @@
                                             <form action="{{ route('books.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-danger btn-sm">
+                                                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

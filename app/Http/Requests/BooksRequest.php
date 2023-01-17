@@ -26,7 +26,7 @@ class BooksRequest extends FormRequest
         return [
             'title' => 'required|max:50',
             'stock' => 'required|integer',
-            'photo' => 'required|image'
+            'photo' => 'image'
         ];
     }
 }

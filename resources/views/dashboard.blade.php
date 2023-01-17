@@ -84,7 +84,7 @@
         </nav>
       </section>
 
-      <section class="d-flex flex-column gap-4">
+      {{-- <section class="d-flex flex-column gap-4">
         <div class="d-flex justify-content-between align-items-center gap-3">
           <h4 class="title-section-content">Exclusive Product From Nike</h4>
           <a href="#" class="btn-link">View All Shoes</a>
@@ -208,7 +208,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> --}}
 
     </main>
 
