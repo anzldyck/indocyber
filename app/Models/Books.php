@@ -10,4 +10,9 @@ class Books extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = ['id'];
+
+    public function getPhotoAttribute($value)
+    {
+        return url('storage/' . $value);
+    }
 }

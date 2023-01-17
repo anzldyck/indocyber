@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\BooksRequest;
+use App\Models\Books;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -13,7 +16,10 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        $data = Books::latest()->get();
+        return view('books.index', [
+            'data'  => $data
+        ]);
     }
 
     /**
@@ -23,7 +29,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -32,9 +38,14 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BooksRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['photo'] = $request->file('photo')->store('assets/book', 'public');
+        $data['created_by'] = Auth::user()->id;
+
+        Books::create($data);
+        return redirect()->route('books');
     }
 
     /**
@@ -56,7 +67,10 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Books::findOrFail($id);
+        return view('books.edit', [
+            'data'  => $data
+        ]);
     }
 
     /**
@@ -66,9 +80,15 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BooksRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['photo'] = $request->file('photo')->store('assets/book', 'public');
+        $data['updated_by'] = Auth::user()->id;
+
+        $item = Books::findOrFail($id);
+        $item->update($data);
+        return redirect()->route('books');
     }
 
     /**
@@ -79,6 +99,12 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Books::findOrFail($id);
+        $data->update([
+            'deleted_by' => Auth::user()->id
+        ]);
+
+        $data->delete();
+        return redirect()->route('books');
     }
 }

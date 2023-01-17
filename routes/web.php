@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BooksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('books', [BooksController::class, 'index'])->name('books');
+    Route::get('books/create', [BooksController::class, 'create'])->name('books.create');
+    Route::post('books', [BooksController::class, 'store'])->name('books.store');
+    Route::get('books/edit/{id}', [BooksController::class, 'edit'])->name('books.edit');
+    Route::put('books/{id}', [BooksController::class, 'update'])->name('books.update');
+    Route::delete('books/{id}', [BooksController::class, 'destroy'])->name('books.destroy');
+});
+require __DIR__.'/auth.php';
